@@ -1,10 +1,9 @@
 const config = {
   db: {
-    /* don't expose password or any sensitive info, done only for demo */
-    host: "db4free.net",
-    user: "restapitest123",
-    password: "restapitest123",
-    database: "restapitest123",
+    host: "mysql",
+    user: "user",
+    password: "password",
+    database: "db",
   },
   listPerPage: 10,
 };
