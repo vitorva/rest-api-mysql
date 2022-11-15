@@ -19,26 +19,42 @@ const programmingLanguages = require("../services/programmingLanguages");
  *              id:
  *                type: integer
  *              name:
- *                type: date
+ *                type: string
  *              release_year:
- *                type: date
+ *                type: string
+ *              githut_rank:
+ *                type: integer
+ *              pypl_rank:
+ *                type : integer
+ *              tiobe_rank:
+ *               type : integer
  *         meta:
  *          type: object
  *          properties:
  *           page:
- *            type : string
- *
+ *            type : integer
+ */
+
+/**
+ * @swagger
+ * tags:
+ *   name: Programming-languages
+ *   description: The programming languages managing API
  */
 
 /**
  * @swagger
  * /programming-languages:
  *   get:
- *     summary: Returns the list of all the books
- *     tags: [Books]
+ *     summary: Returns the list of all the programming language
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         description : "Pagination"
+ *     tags: [Programming-languages]
  *     responses:
  *       200:
- *         description: The list of the books
+ *         description: The list of the programming language
  *         content:
  *           application/json:
  *             schema:
@@ -57,6 +73,30 @@ router.get("/", async function (req, res, next) {
 });
 
 /* POST programming language */
+
+/**
+ * @swagger
+ * /programming-languages:
+ *   post:
+ *     summary: Create a new programming language
+ *     tags: [Programming-languages]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Language'
+ *     responses:
+ *       200:
+ *         description: The programming language was successfully created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Language'
+ *       500:
+ *         description: Some server error
+ */
+
 router.post("/", async function (req, res, next) {
   try {
     res.json(await programmingLanguages.create(req.body));
@@ -67,6 +107,39 @@ router.post("/", async function (req, res, next) {
 });
 
 /* PUT programming language */
+
+/**
+ * @swagger
+ * /programming-languages/{id}:
+ *  put:
+ *    summary: Update the programming language by the id
+ *    tags: [Programming-languages]
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        schema:
+ *          type: string
+ *        required: true
+ *        description: The programming language id
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/Language'
+ *    responses:
+ *      200:
+ *        description: The programming language was updated
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Language'
+ *      404:
+ *        description: The programming language was not found
+ *      500:
+ *        description: Some error happened
+ */
+
 router.put("/:id", async function (req, res, next) {
   try {
     res.json(await programmingLanguages.update(req.params.id, req.body));
@@ -77,6 +150,28 @@ router.put("/:id", async function (req, res, next) {
 });
 
 /* DELETE programming language */
+
+/**
+ * @swagger
+ * /programming-languages/{id}:
+ *   delete:
+ *     summary: Remove the programming language by id
+ *     tags: [Programming-languages]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The programming language id
+ *
+ *     responses:
+ *       200:
+ *         description: The programming language was deleted
+ *       404:
+ *         description: The programming language was not found
+ */
+
 router.delete("/:id", async function (req, res, next) {
   try {
     res.json(await programmingLanguages.remove(req.params.id));
