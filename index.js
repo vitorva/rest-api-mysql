@@ -1,6 +1,7 @@
 const express = require("express");
 const swaggerUI = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
+const cors = require("cors");
 const app = express();
 const port = 3001;
 const programmingLanguagesRouter = require("./routes/programmingLanguages");
@@ -30,6 +31,8 @@ app.use(
     extended: true,
   })
 );
+
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.json({ message: "ok" });
