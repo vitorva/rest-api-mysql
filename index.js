@@ -1,7 +1,28 @@
 const express = require("express");
+const swaggerUI = require("swagger-ui-express");
+const swaggerJsDoc = require("swagger-jsdoc");
 const app = express();
 const port = 3001;
 const programmingLanguagesRouter = require("./routes/programmingLanguages");
+
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Library API",
+      version: "1.0.0",
+      description: "A simple Express library API",
+    },
+    servers: [
+      {
+        url: "http://localhost:3001",
+      },
+    ],
+  },
+  apis: ["./routes/*.js"],
+};
+
+const specs = swaggerJsDoc(options);
 
 app.use(express.json());
 app.use(
@@ -13,6 +34,8 @@ app.use(
 app.get("/", (req, res) => {
   res.json({ message: "ok" });
 });
+
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 
 app.use("/programming-languages", programmingLanguagesRouter);
 

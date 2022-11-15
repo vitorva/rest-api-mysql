@@ -3,6 +3,50 @@ const router = express.Router();
 const programmingLanguages = require("../services/programmingLanguages");
 
 /* GET programming languages. */
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Language:
+ *       type: object
+ *       properties:
+ *         data:
+ *          type: array
+ *          items:
+ *            type: object
+ *            properties:
+ *              id:
+ *                type: integer
+ *              name:
+ *                type: date
+ *              release_year:
+ *                type: date
+ *         meta:
+ *          type: object
+ *          properties:
+ *           page:
+ *            type : string
+ *
+ */
+
+/**
+ * @swagger
+ * /programming-languages:
+ *   get:
+ *     summary: Returns the list of all the books
+ *     tags: [Books]
+ *     responses:
+ *       200:
+ *         description: The list of the books
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Language'
+ */
+
 router.get("/", async function (req, res, next) {
   try {
     res.json(await programmingLanguages.getMultiple(req.query.page));
