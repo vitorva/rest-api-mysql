@@ -8,30 +8,38 @@ const programmingLanguages = require("../services/programmingLanguages");
  * @swagger
  * components:
  *   schemas:
- *     Language:
+ *     Languages:
  *       type: object
  *       properties:
- *         data:
- *          type: array
- *          items:
- *            type: object
- *            properties:
- *              id:
- *                type: integer
- *              name:
- *                type: string
- *              release_year:
- *                type: string
- *              githut_rank:
- *                type: integer
- *              pypl_rank:
- *                type : integer
- *              tiobe_rank:
- *               type : integer
- *         meta:
- *          type: object
- *          properties:
- *           page:
+ *        data:
+ *         type: array
+ *         items:
+ *          $ref: '#/components/schemas/Language'
+ *        meta:
+ *         type: object
+ *         properties:
+ *          page:
+ *           type : integer
+ */
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Language:
+ *        type: object
+ *        properties:
+ *          id:
+ *            type: integer
+ *          name:
+ *            type: string
+ *          release_year:
+ *            type: string
+ *          githut_rank:
+ *            type: integer
+ *          pypl_rank:
+ *            type : integer
+ *          tiobe_rank:
  *            type : integer
  */
 
@@ -60,7 +68,7 @@ const programmingLanguages = require("../services/programmingLanguages");
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/Language'
+ *                 $ref: '#/components/schemas/Languages'
  */
 
 router.get("/", async function (req, res, next) {
