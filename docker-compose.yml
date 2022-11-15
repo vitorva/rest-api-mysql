@@ -12,6 +12,7 @@ services:
     restart: always
     volumes:
       - ./mysql-dump:/docker-entrypoint-initdb.d
+      - ./data:/var/lib/mysql
     environment:
       MYSQL_DATABASE: 'db'
       # So you don't have to use root, but you can if you like
