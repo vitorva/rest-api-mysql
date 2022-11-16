@@ -4,6 +4,7 @@ const swaggerJsDoc = require("swagger-jsdoc");
 const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 3001;
+const hostname = "localhost";
 const programmingLanguagesRouter = require("./routes/programmingLanguages");
 
 const options = {
@@ -14,11 +15,13 @@ const options = {
       version: "1.0.0",
       description: "A simple Express library API",
     },
+    /*
     servers: [
       {
         url: "http://localhost:3001",
       },
     ],
+  */
   },
   apis: ["./routes/*.js"],
 };
@@ -34,10 +37,10 @@ app.use(
 
 app.use(cors());
 
-app.use(cors({ origin: true, credentials: true }));
+//app.use(cors({ origin: true, credentials: true }));
 
 app.get("/", (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
+  //res.header("Access-Control-Allow-Origin", "*");
   res.json({ message: "ok" });
 });
 
@@ -54,6 +57,7 @@ app.use((err, req, res, next) => {
   return;
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+// Prints a log once the server starts listening
+app.listen(port, "46.101.222.19", () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
 });
