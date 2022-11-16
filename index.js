@@ -3,8 +3,7 @@ const swaggerUI = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
 const cors = require("cors");
 const app = express();
-const port = process.env.PORT || 3001;
-const hostname = "localhost";
+const port = process.env.PORT || 80;
 const programmingLanguagesRouter = require("./routes/programmingLanguages");
 
 const options = {
@@ -18,7 +17,7 @@ const options = {
     /*
     servers: [
       {
-        url: "http://localhost:3001",
+        url: "http://localhost:80",
       },
     ],
   */
@@ -58,6 +57,6 @@ app.use((err, req, res, next) => {
 });
 
 // Prints a log once the server starts listening
-app.listen(port, "46.101.222.19", () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}/`);
 });
