@@ -37,6 +37,7 @@ app.use(cors());
 app.use(cors({ origin: true, credentials: true }));
 
 app.get("/", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
   res.json({ message: "ok" });
 });
 
